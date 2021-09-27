@@ -1,7 +1,7 @@
 ---
 title: Slurm Job Management
-author: Center for Advanced Research Computing <br> University of Southern California
-date: 2021-06-08
+author: Agrhymet Regional Center - HPC Training
+date: 2021-09-27
 ---
 
 
@@ -26,7 +26,6 @@ date: 2021-06-08
   - Allocates access to resources (compute nodes)
   - Provides a framework to run and monitor jobs on allocated nodes
   - Manages a job queue for competing resource requests
-- Specific configuration for CARC clusters
 - Official documentation: [https://slurm.schedmd.com](https://slurm.schedmd.com)
 
 
@@ -70,15 +69,9 @@ date: 2021-06-08
 - Default output lists information by partition and node status:
 
 ```
-$ sinfo
+[root@master-01 ~]# sinfo
 PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
-debug        up      30:00      1    mix a02-26
-debug        up      30:00      5   idle e05-[42,76,78,80],e22-13
-epyc-64      up 2-00:00:00      1   drng b22-21
-epyc-64      up 2-00:00:00      1    mix b22-31
-epyc-64      up 2-00:00:00     30  alloc b22-[01-20,22-30,32]
-main*        up 2-00:00:00      5 drain* d17-[40-44]
-...
+defq*        up   infinite     16   idle compute-[01-16]
 ```
 
 
@@ -89,21 +82,30 @@ main*        up 2-00:00:00      5 drain* d17-[40-44]
   - Can also use SINFO_FORMAT environment variable to set
   - `export SINFO_FORMAT=...`
   - Add to `~/.bashrc` to automatically set when logging in
-- `sinfo2` is alias for listing information by partition, node type, and node status
 
 
 ## sinfo example
 
 ```
-$ sinfo -lNp debug
-Thu Mar 11 14:14:02 2021
-NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON
-a02-26         1     debug       mixed 16      2:8:1  63000        0      1 xeon-264 none
-e05-42         1     debug        idle 16      2:8:1  63400        0      1 xeon-265 none
-e05-76         1     debug        idle 16      2:8:1  63400        0      1 xeon-265 none
-e05-78         1     debug        idle 16      2:8:1  63400        0      1 xeon-265 none
-e05-80         1     debug        idle 16      2:8:1  63400        0      1 xeon-265 none
-e22-13         1     debug        idle 20     2:10:1 128000        0      1 xeon-264 none
+[root@master-01 ~]# sinfo -lNp defq
+Mon Sep 27 07:36:18 2021
+NODELIST    NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON
+compute-01      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-02      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-03      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-04      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-05      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-06      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-07      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-08      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-09      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-10      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-11      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-12      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-13      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-14      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-15      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-16      1     defq*        idle 80     80:1:1      1        0      1   (null) none
 ```
 
 
@@ -125,22 +127,9 @@ e22-13         1     debug        idle 20     2:10:1 128000        0      1 xeon
   - The node is in an advanced reservation and not generally available
 
 
-## sinfo example 2
-
-```
-$ sinfo --states=idle
-PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
-debug        up      30:00      5   idle e05-[42,76,78,80],e22-13
-epyc-64      up 2-00:00:00      0    n/a
-main*        up 2-00:00:00      0    n/a
-oneweek      up 7-00:00:00     34   idle e01-[48,52,60,62],e02-[41-46,48-63,65-72]
-largemem     up 7-00:00:00      0    n/a
-```
-
-
 ## Exercise 1
 
-Display info for the epyc-64 partition
+Display info for the defq partition
 
 
 ## 3 --- Submitting jobs
@@ -179,10 +168,10 @@ Submitted batch job 3353548
 #SBATCH --account=<account_id>
 
 module purge
-module load gcc/8.3.0
-module load julia/1.5.2
+module load gcc/10.2.0
+module load netcdf-c-4.7.4-intel-19.1.2.254-xnch5ul
 
-julia --threads $SLURM_CPUS_PER_TASK script.jl
+nc-config
 ```
 
 - Generic structure:
@@ -267,14 +256,11 @@ sleep 280
 #SBATCH --account=<account_id>
 
 module purge
-module load gcc/8.3.0
-module load cuda/10.1.243
+module load gcc/10.2.0
 
 ./program
 ```
 
-- Add option: `#SBATCH --gres=gpu:<gpu_type>:<number>`
-- [CARC User Guide for Using GPUs](https://carc.usc.edu/user-information/user-guides/software-and-programming/using-gpus)
 
 
 ## Job output files
@@ -345,7 +331,7 @@ julia --threads $SLURM_CPUS_PER_TASK script.jl
 - Launch parallel tasks (job steps) for MPI jobs
 - `srun --help`
 - [https://slurm.schedmd.com/srun.html](https://slurm.schedmd.com/srun.html)
-- [CARC User Guide for Using MPI](https://carc.usc.edu/user-information/user-guides/software-and-programming/mpi)
+
 
 
 ## Example job script for MPI job
@@ -764,12 +750,3 @@ $ squeue -u ttrojan
 - [CARC User Guide for Running Jobs](https://carc.usc.edu/user-information/user-guides/hpc-basics/running-jobs)
 - [CARC Slurm Job Script Templates](https://carc.usc.edu/user-information/user-guides/hpc-basics/slurm-templates)
 - Video learning: [Submitting jobs](https://carc.usc.edu/education-and-outreach/video-learning/submitting-jobs)
-
-
-## Getting help
-
-- [Submit a support ticket](https://carc.usc.edu/user-information/ticket-submission)
-- [User Forum](https://hpc-discourse.usc.edu/)
-- Office Hours
-  - Every Tuesday 2:30-5pm (currently via Zoom)
-  - Register [here](https://carc.usc.edu/news-and-events/events)
