@@ -6,56 +6,40 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="Content-Style-Type" content="text/css" />
   <meta name="generator" content="pandoc" />
-  <meta name="author" content="Center for Advanced Research Computing   University of Southern California" />
-  <meta name="date" content="2021-06-08" />
+  <meta name="author" content="Agrhymet Regional Center - HPC Training" />
+  <meta name="date" content="2021-01-01" />
   <title>Slurm Job Management</title>
-  <style type="text/css">
-    code{white-space: pre-wrap;}
-    span.smallcaps{font-variant: small-caps;}
-    span.underline{text-decoration: underline;}
-    div.column{display: inline-block; vertical-align: top; width: 50%;}
-    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-    ul.task-list{list-style: none;}
-  </style>
+  <style type="text/css">code{white-space: pre;}</style>
   <link rel="stylesheet" type="text/css" media="screen, projection, print"
-    href="https://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
   <link rel="stylesheet" type="text/css" media="screen, projection, print"
    href="main.css" />
-  <script src="https://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
     charset="utf-8" type="text/javascript"></script>
 </head>
 <body>
 <div class="slide titlepage">
   <h1 class="title">Slurm Job Management</h1>
   <p class="author">
-Center for Advanced Research Computing <br> University of Southern California
+Agrhymet Regional Center - HPC Training
   </p>
-  <p class="date">2021-06-08</p>
+  <p class="date">2021</p>
 </div>
 <div id="outline" class="slide section level2">
 <h1>Outline</h1>
-<p>1 — Overview<br />
-2 — Cluster info<br />
-3 — Submitting jobs<br />
-4 — Monitoring jobs<br />
-5 — Other commands<br />
-6 — Job dependencies<br />
-7 — Job arrays</p>
+<p>1 --- Overview<br />2 --- Cluster info<br />3 --- Submitting jobs<br />4 --- Monitoring jobs<br />5 --- Other commands<br />6 --- Job dependencies<br />7 --- Job arrays</p>
 </div>
 <div id="overview" class="slide section level2">
-<h1>1 — Overview</h1>
+<h1>1 --- Overview</h1>
 </div>
 <div id="what-is-slurm" class="slide section level2">
 <h1>What is Slurm?</h1>
 <ul>
 <li>Open-source management and job scheduling system for Linux computing clusters</li>
-<li>Three main functions:
-<ul>
+<li>Three main functions:</li>
 <li>Allocates access to resources (compute nodes)</li>
 <li>Provides a framework to run and monitor jobs on allocated nodes</li>
 <li>Manages a job queue for competing resource requests</li>
-</ul></li>
-<li>Specific configuration for CARC clusters</li>
 <li>Official documentation: <a href="https://slurm.schedmd.com">https://slurm.schedmd.com</a></li>
 </ul>
 </div>
@@ -64,66 +48,66 @@ Center for Advanced Research Computing <br> University of Southern California
 <table>
 <thead>
 <tr class="header">
-<th>Category</th>
-<th>Command</th>
-<th>Purpose</th>
+<th align="left">Category</th>
+<th align="left">Command</th>
+<th align="left">Purpose</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Cluster info</td>
-<td>sinfo</td>
-<td>Display compute partition and node information</td>
+<td align="left">Cluster info</td>
+<td align="left">sinfo</td>
+<td align="left">Display compute partition and node information</td>
 </tr>
 <tr class="even">
-<td>Submitting jobs</td>
-<td>sbatch</td>
-<td>Submit a job script for remote execution</td>
+<td align="left">Submitting jobs</td>
+<td align="left">sbatch</td>
+<td align="left">Submit a job script for remote execution</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>srun</td>
-<td>Launch parallel tasks (job steps) for MPI jobs</td>
+<td align="left"></td>
+<td align="left">srun</td>
+<td align="left">Launch parallel tasks (job steps) for MPI jobs</td>
 </tr>
 <tr class="even">
-<td></td>
-<td>salloc</td>
-<td>Allocate resources for an interactive job</td>
+<td align="left"></td>
+<td align="left">salloc</td>
+<td align="left">Allocate resources for an interactive job</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>squeue</td>
-<td>Display status of jobs and job steps</td>
+<td align="left"></td>
+<td align="left">squeue</td>
+<td align="left">Display status of jobs and job steps</td>
 </tr>
 <tr class="even">
-<td></td>
-<td>sprio</td>
-<td>Display job priority information</td>
+<td align="left"></td>
+<td align="left">sprio</td>
+<td align="left">Display job priority information</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>scancel</td>
-<td>Cancel pending or running jobs</td>
+<td align="left"></td>
+<td align="left">scancel</td>
+<td align="left">Cancel pending or running jobs</td>
 </tr>
 <tr class="even">
-<td>Monitoring jobs</td>
-<td>sstat</td>
-<td>Display status information for running jobs</td>
+<td align="left">Monitoring jobs</td>
+<td align="left">sstat</td>
+<td align="left">Display status information for running jobs</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>sacct</td>
-<td>Display accounting information for jobs</td>
+<td align="left"></td>
+<td align="left">sacct</td>
+<td align="left">Display accounting information for jobs</td>
 </tr>
 <tr class="even">
-<td></td>
-<td>seff</td>
-<td>Display job efficiency information for past jobs</td>
+<td align="left"></td>
+<td align="left">seff</td>
+<td align="left">Display job efficiency information for past jobs</td>
 </tr>
 <tr class="odd">
-<td>Other</td>
-<td>scontrol</td>
-<td>Display or modify Slurm configuration and state</td>
+<td align="left">Other</td>
+<td align="left">scontrol</td>
+<td align="left">Display or modify Slurm configuration and state</td>
 </tr>
 </tbody>
 </table>
@@ -146,102 +130,77 @@ Center for Advanced Research Computing <br> University of Southern California
 </ol>
 </div>
 <div id="cluster-info" class="slide section level2">
-<h1>2 — Cluster info</h1>
+<h1>2 --- Cluster info</h1>
 </div>
 <div id="sinfo" class="slide section level2">
 <h1>sinfo</h1>
 <ul>
-<li>Display compute partition and node information<br />
-</li>
-<li><code>sinfo --help</code><br />
-</li>
+<li>Display compute partition and node information<br /></li>
+<li><code>sinfo --help</code><br /></li>
 <li><a href="https://slurm.schedmd.com/sinfo.html">https://slurm.schedmd.com/sinfo.html</a></li>
 <li>Default output lists information by partition and node status:</li>
 </ul>
-<pre><code>$ sinfo
+<pre><code>[root@master-01 ~]# sinfo
 PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
-debug        up      30:00      1    mix a02-26
-debug        up      30:00      5   idle e05-[42,76,78,80],e22-13
-epyc-64      up 2-00:00:00      1   drng b22-21
-epyc-64      up 2-00:00:00      1    mix b22-31
-epyc-64      up 2-00:00:00     30  alloc b22-[01-20,22-30,32]
-main*        up 2-00:00:00      5 drain* d17-[40-44]
-...</code></pre>
+defq*        up   infinite     16   idle compute-[01-16]</code></pre>
 </div>
 <div id="sinfo-continued" class="slide section level2">
 <h1>sinfo (continued)</h1>
 <ul>
 <li>Useful options include <code>--Node</code>, <code>--partition</code>, and <code>--states</code></li>
-<li>Many formatting options with <code>--format</code> or <code>--Format</code>
-<ul>
+<li>Many formatting options with <code>--format</code> or <code>--Format</code></li>
 <li>Can also use SINFO_FORMAT environment variable to set</li>
 <li><code>export SINFO_FORMAT=...</code></li>
 <li>Add to <code>~/.bashrc</code> to automatically set when logging in</li>
-</ul></li>
-<li><code>sinfo2</code> is alias for listing information by partition, node type, and node status</li>
 </ul>
 </div>
 <div id="sinfo-example" class="slide section level2">
 <h1>sinfo example</h1>
-<pre><code>$ sinfo -lNp debug
-Thu Mar 11 14:14:02 2021
-NODELIST   NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON
-a02-26         1     debug       mixed 16      2:8:1  63000        0      1 xeon-264 none
-e05-42         1     debug        idle 16      2:8:1  63400        0      1 xeon-265 none
-e05-76         1     debug        idle 16      2:8:1  63400        0      1 xeon-265 none
-e05-78         1     debug        idle 16      2:8:1  63400        0      1 xeon-265 none
-e05-80         1     debug        idle 16      2:8:1  63400        0      1 xeon-265 none
-e22-13         1     debug        idle 20     2:10:1 128000        0      1 xeon-264 none</code></pre>
+<pre><code>[root@master-01 ~]# sinfo -lNp defq
+Mon Sep 27 07:36:18 2021
+NODELIST    NODES PARTITION       STATE CPUS    S:C:T MEMORY TMP_DISK WEIGHT AVAIL_FE REASON
+compute-01      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-02      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-03      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-04      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-05      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-06      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-07      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-08      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-09      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-10      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-11      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-12      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-13      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-14      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-15      1     defq*        idle 80     80:1:1      1        0      1   (null) none
+compute-16      1     defq*        idle 80     80:1:1      1        0      1   (null) none</code></pre>
 </div>
 <div id="codes-for-common-node-states" class="slide section level2">
 <h1>Codes for common node states</h1>
 <ul>
-<li>ALLOCATED
-<ul>
+<li>ALLOCATED</li>
 <li>The node has been allocated to one or more jobs</li>
-</ul></li>
-<li>DOWN
-<ul>
+<li>DOWN</li>
 <li>The node is unavailable for use</li>
-</ul></li>
-<li>DRAINING
-<ul>
+<li>DRAINING</li>
 <li>The node is currently executing a job, but will not be allocated additional jobs</li>
-</ul></li>
-<li>IDLE
-<ul>
+<li>IDLE</li>
 <li>The node is not allocated to any jobs and is available for use</li>
-</ul></li>
-<li>MAINT
-<ul>
-<li>The node is currently in a reservation with a flag value of “maintenance”</li>
-</ul></li>
-<li>MIXED
-<ul>
+<li>MAINT</li>
+<li>The node is currently in a reservation with a flag value of &quot;maintenance&quot;</li>
+<li>MIXED</li>
 <li>The node has some of its CPUs ALLOCATED while others are IDLE</li>
-</ul></li>
-<li>RESERVED
-<ul>
+<li>RESERVED</li>
 <li>The node is in an advanced reservation and not generally available</li>
-</ul></li>
 </ul>
-</div>
-<div id="sinfo-example-2" class="slide section level2">
-<h1>sinfo example 2</h1>
-<pre><code>$ sinfo --states=idle
-PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
-debug        up      30:00      5   idle e05-[42,76,78,80],e22-13
-epyc-64      up 2-00:00:00      0    n/a
-main*        up 2-00:00:00      0    n/a
-oneweek      up 7-00:00:00     34   idle e01-[48,52,60,62],e02-[41-46,48-63,65-72]
-largemem     up 7-00:00:00      0    n/a</code></pre>
 </div>
 <div id="exercise-1" class="slide section level2">
 <h1>Exercise 1</h1>
-<p>Display info for the epyc-64 partition</p>
+<p>Display info for the defq partition</p>
 </div>
 <div id="submitting-jobs" class="slide section level2">
-<h1>3 — Submitting jobs</h1>
+<h1>3 --- Submitting jobs</h1>
 </div>
 <div id="three-commands-for-submitting-jobs" class="slide section level2">
 <h1>Three commands for submitting jobs</h1>
@@ -274,17 +233,15 @@ Submitted batch job 3353548</code></pre>
 #SBATCH --account=&lt;account_id&gt;
 
 module purge
-module load gcc/8.3.0
-module load julia/1.5.2
+module load gcc/10.2.0
+module load netcdf-c-4.7.4-intel-19.1.2.254-xnch5ul
 
-julia --threads $SLURM_CPUS_PER_TASK script.jl</code></pre>
+nc-config</code></pre>
 <ul>
-<li>Generic structure:
-<ul>
+<li>Generic structure:</li>
 <li>Specify SBATCH options (resource requests)</li>
 <li>Load software and set up environment</li>
 <li>Run commands</li>
-</ul></li>
 </ul>
 </div>
 <div id="commonly-used-sbatch-options" class="slide section level2">
@@ -292,62 +249,62 @@ julia --threads $SLURM_CPUS_PER_TASK script.jl</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th>Option</th>
-<th>Description</th>
+<th align="left">Option</th>
+<th align="left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>--nodes=&lt;number&gt;</code></td>
-<td>Number of nodes to use</td>
+<td align="left"><code>--nodes=&lt;number&gt;</code></td>
+<td align="left">Number of nodes to use</td>
 </tr>
 <tr class="even">
-<td><code>--ntasks=&lt;number&gt;</code></td>
-<td>Number of processes to run</td>
+<td align="left"><code>--ntasks=&lt;number&gt;</code></td>
+<td align="left">Number of processes to run</td>
 </tr>
 <tr class="odd">
-<td><code>--cpus-per-task=&lt;number&gt;</code></td>
-<td>Number of cores per task</td>
+<td align="left"><code>--cpus-per-task=&lt;number&gt;</code></td>
+<td align="left">Number of cores per task</td>
 </tr>
 <tr class="even">
-<td><code>--mem=&lt;number&gt;</code></td>
-<td>Total memory (per node)</td>
+<td align="left"><code>--mem=&lt;number&gt;</code></td>
+<td align="left">Total memory (per node)</td>
 </tr>
 <tr class="odd">
-<td><code>--mem-per-cpu=&lt;number&gt;</code></td>
-<td>Memory per processor core</td>
+<td align="left"><code>--mem-per-cpu=&lt;number&gt;</code></td>
+<td align="left">Memory per processor core</td>
 </tr>
 <tr class="even">
-<td><code>--constraint=&lt;attribute&gt;</code></td>
-<td>Node property to request (e.g., <code>xeon-4116</code>)</td>
+<td align="left"><code>--constraint=&lt;attribute&gt;</code></td>
+<td align="left">Node property to request (e.g., <code>xeon-4116</code>)</td>
 </tr>
 <tr class="odd">
-<td><code>--partition=&lt;partition_name&gt;</code></td>
-<td>Request nodes on specified partition</td>
+<td align="left"><code>--partition=&lt;partition_name&gt;</code></td>
+<td align="left">Request nodes on specified partition</td>
 </tr>
 <tr class="even">
-<td><code>--time=&lt;D-HH:MM:SS&gt;</code></td>
-<td>Maximum run time</td>
+<td align="left"><code>--time=&lt;D-HH:MM:SS&gt;</code></td>
+<td align="left">Maximum run time</td>
 </tr>
 <tr class="odd">
-<td><code>--account=&lt;account_id&gt;</code></td>
-<td>Account to charge resources to</td>
+<td align="left"><code>--account=&lt;account_id&gt;</code></td>
+<td align="left">Account to charge resources to</td>
 </tr>
 <tr class="even">
-<td><code>--mail-type=&lt;value&gt;</code></td>
-<td>E-mail notifications (e.g., <code>begin|end|fail|all</code>)</td>
+<td align="left"><code>--mail-type=&lt;value&gt;</code></td>
+<td align="left">E-mail notifications (e.g., <code>begin|end|fail|all</code>)</td>
 </tr>
 <tr class="odd">
-<td><code>--mail-user=&lt;address&gt;</code></td>
-<td>E-mail address</td>
+<td align="left"><code>--mail-user=&lt;address&gt;</code></td>
+<td align="left">E-mail address</td>
 </tr>
 <tr class="even">
-<td><code>--output=&lt;filename&gt;</code></td>
-<td>File for standard output</td>
+<td align="left"><code>--output=&lt;filename&gt;</code></td>
+<td align="left">File for standard output</td>
 </tr>
 <tr class="odd">
-<td><code>--error=&lt;filename&gt;</code></td>
-<td>File for standard error</td>
+<td align="left"><code>--error=&lt;filename&gt;</code></td>
+<td align="left">File for standard error</td>
 </tr>
 </tbody>
 </table>
@@ -357,38 +314,38 @@ julia --threads $SLURM_CPUS_PER_TASK script.jl</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th>Option</th>
-<th>Default value</th>
+<th align="left">Option</th>
+<th align="left">Default value</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>--nodes</code></td>
-<td>1</td>
+<td align="left"><code>--nodes</code></td>
+<td align="left">1</td>
 </tr>
 <tr class="even">
-<td><code>--ntasks</code></td>
-<td>1</td>
+<td align="left"><code>--ntasks</code></td>
+<td align="left">1</td>
 </tr>
 <tr class="odd">
-<td><code>--cpus-per-task</code></td>
-<td>1</td>
+<td align="left"><code>--cpus-per-task</code></td>
+<td align="left">1</td>
 </tr>
 <tr class="even">
-<td><code>--mem-per-cpu</code></td>
-<td>2GB</td>
+<td align="left"><code>--mem-per-cpu</code></td>
+<td align="left">2GB</td>
 </tr>
 <tr class="odd">
-<td><code>--time</code></td>
-<td>1:00:00</td>
+<td align="left"><code>--time</code></td>
+<td align="left">1:00:00</td>
 </tr>
 <tr class="even">
-<td><code>--partition</code></td>
-<td>main</td>
+<td align="left"><code>--partition</code></td>
+<td align="left">main</td>
 </tr>
 <tr class="odd">
-<td><code>--account</code></td>
-<td>default project account</td>
+<td align="left"><code>--account</code></td>
+<td align="left">default project account</td>
 </tr>
 </tbody>
 </table>
@@ -433,14 +390,9 @@ sleep 280</code></pre>
 #SBATCH --account=&lt;account_id&gt;
 
 module purge
-module load gcc/8.3.0
-module load cuda/10.1.243
+module load gcc/10.2.0
 
 ./program</code></pre>
-<ul>
-<li>Add option: <code>#SBATCH --gres=gpu:&lt;gpu_type&gt;:&lt;number&gt;</code></li>
-<li><a href="https://carc.usc.edu/user-information/user-guides/software-and-programming/using-gpus">CARC User Guide for Using GPUs</a></li>
-</ul>
 </div>
 <div id="job-output-files" class="slide section level2">
 <h1>Job output files</h1>
@@ -453,70 +405,61 @@ module load cuda/10.1.243
 </div>
 <div id="current-job-limits-on-discovery" class="slide section level2">
 <h1>Current job limits on Discovery</h1>
-<table style="width:100%;">
-<colgroup>
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-<col width="16%" />
-</colgroup>
+<table>
 <thead>
 <tr class="header">
-<th>Partition</th>
-<th>Maximum run time</th>
-<th>Maximum concurrent CPUs</th>
-<th>Maximum concurrent GPUs</th>
-<th>Maximum number of jobs queued</th>
-<th>Maximum number of jobs running</th>
+<th align="left">Partition</th>
+<th align="left">Maximum run time</th>
+<th align="left">Maximum concurrent CPUs</th>
+<th align="left">Maximum concurrent GPUs</th>
+<th align="left">Maximum number of jobs queued</th>
+<th align="left">Maximum number of jobs running</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>main</td>
-<td>48 hours</td>
-<td>1,200</td>
-<td>36</td>
-<td>5,000</td>
-<td>500</td>
+<td align="left">main</td>
+<td align="left">48 hours</td>
+<td align="left">1,200</td>
+<td align="left">36</td>
+<td align="left">5,000</td>
+<td align="left">500</td>
 </tr>
 <tr class="even">
-<td>epyc-64</td>
-<td>48 hours</td>
-<td>1,200</td>
-<td>n/a</td>
-<td>5,000</td>
-<td>500</td>
+<td align="left">epyc-64</td>
+<td align="left">48 hours</td>
+<td align="left">1,200</td>
+<td align="left">n/a</td>
+<td align="left">5,000</td>
+<td align="left">500</td>
 </tr>
 <tr class="odd">
-<td>oneweek</td>
-<td>168 hours</td>
-<td>208</td>
-<td>n/a</td>
-<td>50</td>
-<td>50</td>
+<td align="left">oneweek</td>
+<td align="left">168 hours</td>
+<td align="left">208</td>
+<td align="left">n/a</td>
+<td align="left">50</td>
+<td align="left">50</td>
 </tr>
 <tr class="even">
-<td>largemem</td>
-<td>168 hours</td>
-<td>120</td>
-<td>n/a</td>
-<td>10</td>
-<td>2</td>
+<td align="left">largemem</td>
+<td align="left">168 hours</td>
+<td align="left">120</td>
+<td align="left">n/a</td>
+<td align="left">10</td>
+<td align="left">2</td>
 </tr>
 <tr class="odd">
-<td>debug</td>
-<td>30 minutes</td>
-<td>48</td>
-<td>4</td>
-<td>5</td>
-<td>5</td>
+<td align="left">debug</td>
+<td align="left">30 minutes</td>
+<td align="left">48</td>
+<td align="left">4</td>
+<td align="left">5</td>
+<td align="left">5</td>
 </tr>
 </tbody>
 </table>
-<p><em>By default, Endeavour condo partitions will inherit the main partition limits but with a two-week maximum run time</em><br />
-<em>Custom limits can be requested for Endeavour condo partitions</em></p>
+<p><em>By default, Endeavour condo partitions will inherit the main partition limits but with a two-week maximum run time</em><br /><em>Custom limits can be requested for Endeavour condo partitions</em></p>
 </div>
 <div id="environment-variables-for-sbatch" class="slide section level2">
 <h1>Environment variables for sbatch</h1>
@@ -525,44 +468,40 @@ module load cuda/10.1.243
 <li>Some examples:</li>
 </ul>
 <table>
-<colgroup>
-<col width="50%" />
-<col width="50%" />
-</colgroup>
 <thead>
 <tr class="header">
-<th>Variable</th>
-<th>Description</th>
+<th align="left">Variable</th>
+<th align="left">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>SLURM_JOB_ID</td>
-<td>The ID of the job allocation</td>
+<td align="left">SLURM_JOB_ID</td>
+<td align="left">The ID of the job allocation</td>
 </tr>
 <tr class="even">
-<td>SLURM_JOB_NODELIST</td>
-<td>List of nodes allocated to the job</td>
+<td align="left">SLURM_JOB_NODELIST</td>
+<td align="left">List of nodes allocated to the job</td>
 </tr>
 <tr class="odd">
-<td>SLURM_JOB_NUM_NODES</td>
-<td>Total number of nodes in the job’s resource allocation</td>
+<td align="left">SLURM_JOB_NUM_NODES</td>
+<td align="left">Total number of nodes in the job's resource allocation</td>
 </tr>
 <tr class="even">
-<td>SLURM_NTASKS</td>
-<td>Number of tasks requested</td>
+<td align="left">SLURM_NTASKS</td>
+<td align="left">Number of tasks requested</td>
 </tr>
 <tr class="odd">
-<td>SLURM_CPUS_PER_TASK</td>
-<td>Number of CPUs requested per task</td>
+<td align="left">SLURM_CPUS_PER_TASK</td>
+<td align="left">Number of CPUs requested per task</td>
 </tr>
 <tr class="even">
-<td>SLURM_SUBMIT_DIR</td>
-<td>The directory from which <code>sbatch</code> was invoked</td>
+<td align="left">SLURM_SUBMIT_DIR</td>
+<td align="left">The directory from which <code>sbatch</code> was invoked</td>
 </tr>
 <tr class="odd">
-<td>SLURM_ARRAY_TASK_ID</td>
-<td>Job array ID (index) number</td>
+<td align="left">SLURM_ARRAY_TASK_ID</td>
+<td align="left">Job array ID (index) number</td>
 </tr>
 </tbody>
 </table>
@@ -595,7 +534,6 @@ julia --threads $SLURM_CPUS_PER_TASK script.jl</code></pre>
 <li>Launch parallel tasks (job steps) for MPI jobs</li>
 <li><code>srun --help</code></li>
 <li><a href="https://slurm.schedmd.com/srun.html">https://slurm.schedmd.com/srun.html</a></li>
-<li><a href="https://carc.usc.edu/user-information/user-guides/software-and-programming/mpi">CARC User Guide for Using MPI</a></li>
 </ul>
 </div>
 <div id="example-job-script-for-mpi-job" class="slide section level2">
@@ -674,88 +612,58 @@ ttrojan@discovery1:~$</code></pre>
 <div id="common-codes-for-job-state" class="slide section level2">
 <h1>Common codes for job state</h1>
 <ul>
-<li>PD PENDING
-<ul>
+<li>PD PENDING</li>
 <li>Job is awaiting resource allocation</li>
-</ul></li>
-<li>R RUNNING
-<ul>
+<li>R RUNNING</li>
 <li>Job currently has an allocation</li>
-</ul></li>
-<li>CD COMPLETED
-<ul>
+<li>CD COMPLETED</li>
 <li>Job has terminated all processes on all nodes with an exit code of zero</li>
-</ul></li>
-<li>CG COMPLETING
-<ul>
+<li>CG COMPLETING</li>
 <li>Job is in the process of completing. Some processes on some nodes may still be active</li>
-</ul></li>
-<li>CA CANCELLED
-<ul>
+<li>CA CANCELLED</li>
 <li>Job was explicitly cancelled by the user or system administrator. The job may or may not have been initiated</li>
-</ul></li>
 </ul>
 </div>
 <div id="common-codes-for-pending-reason" class="slide section level2">
 <h1>Common codes for pending reason</h1>
 <ul>
-<li>Resources
-<ul>
+<li>Resources</li>
 <li>The job is waiting for resources to become available</li>
-</ul></li>
-<li>Priority
-<ul>
+<li>Priority</li>
 <li>One or more higher priority jobs exist for this partition or advanced reservation</li>
-</ul></li>
-<li>ReqNodeNotAvail
-<ul>
+<li>ReqNodeNotAvail</li>
 <li>Some node specifically required by the job is not currently available</li>
-</ul></li>
-<li>QOSMaxCpuPerUserLimit
-<ul>
+<li>QOSMaxCpuPerUserLimit</li>
 <li>The job has reached the maximum CPU per user limit</li>
-</ul></li>
-<li>QOSMaxGRESPerUser
-<ul>
+<li>QOSMaxGRESPerUser</li>
 <li>The job has reached the maximum GPU per user limit</li>
-</ul></li>
-<li>AssocGrpCPUMinutesLimit
-<ul>
+<li>AssocGrpCPUMinutesLimit</li>
 <li>The project account has run out of CPU time</li>
-</ul></li>
-<li>InvalidAccount
-<ul>
-<li>The job’s account is invalid</li>
-</ul></li>
+<li>InvalidAccount</li>
+<li>The job's account is invalid</li>
 </ul>
 </div>
 <div id="squeue-notes" class="slide section level2">
 <h1>squeue notes</h1>
 <ul>
 <li>Useful options include <code>--start</code> and <code>--partition</code></li>
-<li>Many formatting options with <code>--format</code> or <code>--Format</code>
-<ul>
+<li>Many formatting options with <code>--format</code> or <code>--Format</code></li>
 <li>Can also use SQUEUE_FORMAT environment variable to set</li>
 <li><code>export SQUEUE_FORMAT=...</code></li>
 <li>Add to <code>~/.bashrc</code> to automatically set when logging in</li>
-</ul></li>
-<li>Create shorter alias
-<ul>
-<li><code>alias myq="squeue -u $USER"</code></li>
+<li>Create shorter alias</li>
+<li><code>alias myq=&quot;squeue -u $USER&quot;</code></li>
 <li>Add to <code>~/.bashrc</code> to automatically set when logging in</li>
-</ul></li>
 </ul>
 </div>
 <div id="job-priorities" class="slide section level2">
 <h1>Job priorities</h1>
 <ul>
 <li>Based on a fairshare algorithm and job age</li>
-<li>Fairshare values depend on a number of factors:
-<ul>
+<li>Fairshare values depend on a number of factors:</li>
 <li>Number of jobs submitted</li>
 <li>Resources used</li>
 <li>Project account activity</li>
-</ul></li>
 <li><a href="https://slurm.schedmd.com/fair_tree.html">https://slurm.schedmd.com/fair_tree.html</a></li>
 </ul>
 </div>
@@ -788,7 +696,7 @@ $ sprio -j 3351270 -n
 scancel -u ttrojan</code></pre>
 </div>
 <div id="monitoring-jobs" class="slide section level2">
-<h1>4 — Monitoring jobs</h1>
+<h1>4 --- Monitoring jobs</h1>
 </div>
 <div id="three-commands-for-monitoring-jobs" class="slide section level2">
 <h1>Three commands for monitoring jobs</h1>
@@ -827,12 +735,10 @@ sacct --format=JobID,MaxRSS,AveCPUFreq,MaxDiskRead,MaxDiskWrite,State,ExitCode</
 <ul>
 <li>By default, only displays jobs from past day</li>
 <li>Some useful options are <code>--starttime</code>, <code>--endtime</code>, <code>--brief</code>, and <code>--state</code></li>
-<li>Many formatting options with <code>--format</code>
-<ul>
+<li>Many formatting options with <code>--format</code></li>
 <li>Can also use SACCT_FORMAT environment variable to set</li>
 <li><code>export SACCT_FORMAT=...</code></li>
 <li>Add to <code>~/.bashrc</code> to automatically set when logging in</li>
-</ul></li>
 </ul>
 </div>
 <div id="job-exit-codes" class="slide section level2">
@@ -847,12 +753,10 @@ sacct --format=JobID,MaxRSS,AveCPUFreq,MaxDiskRead,MaxDiskWrite,State,ExitCode</
 <li>Exit code 126 indicates command cannot execute</li>
 <li>Exit code 127 indicates command not found</li>
 <li>Exit code 128 indicates invalid argument to exit</li>
-<li>Exit codes 129-255 indicate jobs terminated by Linux signals
-<ul>
+<li>Exit codes 129-255 indicate jobs terminated by Linux signals</li>
 <li>For these, subtract 128 from the number and match to signal code</li>
 <li>Enter <code>kill -l</code> to list signal codes</li>
 <li>Enter <code>man signal</code> for more information</li>
-</ul></li>
 </ul>
 </div>
 <div id="seff" class="slide section level2">
@@ -878,7 +782,7 @@ Memory Efficiency: 6.63% of 70.00 GB</code></pre>
 <p>Check efficiency of previously submitted job</p>
 </div>
 <div id="other-commands" class="slide section level2">
-<h1>5 — Other commands</h1>
+<h1>5 --- Other commands</h1>
 </div>
 <div id="scontrol" class="slide section level2">
 <h1>scontrol</h1>
@@ -899,7 +803,7 @@ scontrol hold &lt;jobid&gt;
 scontrol release &lt;jobid&gt;</code></pre>
 </div>
 <div id="job-dependencies" class="slide section level2">
-<h1>6 — Job dependencies</h1>
+<h1>6 --- Job dependencies</h1>
 </div>
 <div id="why-use-a-job-dependency" class="slide section level2">
 <h1>Why use a job dependency?</h1>
@@ -944,17 +848,15 @@ $ squeue -u ttrojan
 3353548      main   jl.job  ttrojan  R       0:32      1 b22-31</code></pre>
 </div>
 <div id="job-arrays" class="slide section level2">
-<h1>7 — Job arrays</h1>
+<h1>7 --- Job arrays</h1>
 </div>
 <div id="why-use-a-job-array" class="slide section level2">
 <h1>Why use a job array?</h1>
 <ul>
 <li>For submitting and managing collections of similar jobs quickly and easily</li>
-<li>Some examples:
-<ul>
+<li>Some examples:</li>
 <li>Varying simulation or model parameters</li>
 <li>Running the same statistical models on different datasets</li>
-</ul></li>
 <li><a href="https://slurm.schedmd.com/job_array.html">https://slurm.schedmd.com/job_array.html</a></li>
 </ul>
 </div>
@@ -1022,18 +924,6 @@ $ squeue -u ttrojan
 <li><a href="https://carc.usc.edu/user-information/user-guides/hpc-basics/running-jobs">CARC User Guide for Running Jobs</a></li>
 <li><a href="https://carc.usc.edu/user-information/user-guides/hpc-basics/slurm-templates">CARC Slurm Job Script Templates</a></li>
 <li>Video learning: <a href="https://carc.usc.edu/education-and-outreach/video-learning/submitting-jobs">Submitting jobs</a></li>
-</ul>
-</div>
-<div id="getting-help" class="slide section level2">
-<h1>Getting help</h1>
-<ul>
-<li><a href="https://carc.usc.edu/user-information/ticket-submission">Submit a support ticket</a></li>
-<li><a href="https://hpc-discourse.usc.edu/">User Forum</a></li>
-<li>Office Hours
-<ul>
-<li>Every Tuesday 2:30-5pm (currently via Zoom)</li>
-<li>Register <a href="https://carc.usc.edu/news-and-events/events">here</a></li>
-</ul></li>
 </ul>
 </div>
 </body>
